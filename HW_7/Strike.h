@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "MathAndConstants.h"
+#include "Logger.h"
 
 /* Для сравнения чисел и лимит на длину полета(не хотелось бы взорваться вместе с целью:) )
 const double eps = 0.01;
@@ -36,17 +37,17 @@ public:
 	bool isValid() {
 		// TODO
 		if (mover.maxH < MathAndConstants::get_eps()) {
-			std::cout << "Max Height should be more than zero" << std::endl;
+			UserLogger::self().log(Logger::ERROR, "Max Height should be more than zero");
 			return false;
 		}
 
 		if (abs(mover.p_start.x - mover.p_end.x) < MathAndConstants::get_minDistance()) {
-			std::cout << "The distance between start and end points is too small" << std::endl;
+			UserLogger::self().log(Logger::ERROR, "The distance between start and end points is too small");
 			return false;
 		}
 
 		if (abs(mover.p_start.x - mover.p_end.x) > MathAndConstants::get_maxDistance()) {
-			std::cout << "The distance between start and end points is too large" << std::endl;
+			UserLogger::self().log(Logger::ERROR, "The distance between start and end points is too large");
 			return false;
 		}
 
